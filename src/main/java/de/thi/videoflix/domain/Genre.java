@@ -40,7 +40,7 @@ public class Genre implements Serializable {
     Drama
     Fantasy
     Biografie
-    Komödie
+    Komoedie
     Horror
     Krimi
     Krieg

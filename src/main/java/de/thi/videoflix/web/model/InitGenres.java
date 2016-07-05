@@ -31,7 +31,7 @@ public class InitGenres {
         genreService.addGenre(new Genre("Drama"));
         genreService.addGenre(new Genre("Fantasy"));
         genreService.addGenre(new Genre("Biografie"));
-        genreService.addGenre(new Genre("Komödie"));
+        genreService.addGenre(new Genre("Komoedie"));
         genreService.addGenre(new Genre("Horror"));
         genreService.addGenre(new Genre("Krimi"));
         genreService.addGenre(new Genre("Krieg"));
