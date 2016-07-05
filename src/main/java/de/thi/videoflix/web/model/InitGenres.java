@@ -1,4 +1,4 @@
-﻿package de.thi.videoflix.web.model;
+package de.thi.videoflix.web.model;
 
 import de.thi.videoflix.domain.Genre;
 import de.thi.videoflix.services.GenreService;

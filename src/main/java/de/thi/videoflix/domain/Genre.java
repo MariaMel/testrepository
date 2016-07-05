@@ -1,4 +1,4 @@
-﻿package de.thi.videoflix.domain;
+package de.thi.videoflix.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;

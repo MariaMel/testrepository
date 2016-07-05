@@ -117,7 +117,7 @@ public class VideoServiceIntegrationTest {
     @Test
     @Cleanup
     public void thatVideoCanBeDeleted() throws Exception {
-        String title = "Vier Fäuste gegen Rio";
+        String title = "Vier Faeuste gegen Rio";
         Video v1 = new Video(title);
         videoService.addVideo(v1);
 
