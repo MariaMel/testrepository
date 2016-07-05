@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xml:lang="en" lang="en">
+<h:head>
+    <f:metadata>
+        <f:viewParam name="video" value="#{selectedVideo.videoId}"/>
+        <f:viewAction action="#{selectedVideo.init}"/>
+    </f:metadata>
+</h:head>
+<body>
+    <ui:composition template="template.xhtml">
+    <ui:define name="content">
+        <h1 id="heading">#{selectedVideo.video.name}</h1>
+        <o:graphicImage rendered="#{not empty selectedVideo.video.cover}"
+                        id="img"
+                        value="#{loadImage.getImageForId(selectedVideo.videoId)}"
+                        lastModified="#{now}" />
+        <h:form rendered="#{request.remoteUser != null}" >
+            <h:commandButton value="#{msg['details.delpic']}" action="#{selectedVideo.doDeleteImage}" rendered="#{not empty selectedVideo.video.cover}" />
+        </h:form>
+        <p>#{msg['details.descr']}: #{selectedVideo.video.description}</p>
+        <p>#{msg['details.year']}: #{selectedVideo.video.year}</p>
+        <p>#{msg['details.studio']}: #{selectedVideo.video.studio}</p>
+        <p>#{msg['details.director']}: #{selectedVideo.video.director}</p>
+        <p>#{msg['details.genres']}:</p>
+        <ui:repeat id="genres" value="#{selectedVideo.video.genres}" var="genre">
+                <p>#{genre.name}</p>
+        </ui:repeat>
+        <p>#{msg['details.series']}: #{selectedVideo.video.is_series ? msg['details.yes'] : msg['details.no']}</p>
+        <h:form>
+            <p:commandButton value="#{msg['listvids.edit']}"
+                             ajax="false"
+                             action="#{editVideo.doSwitchToEditPage(selectedVideo.video)}" />
+            <p:commandButton value="#{msg['listvids.delete']}" onclick="confirmation.show()" rendered="#{request.remoteUser != null}" />
+            <p:commandButton value="#{msg['details.back']}" ajax="false" action="listVideos.xhtml" />
+            <p:confirmDialog
+                    message="Wirklich loeschen?"
+                    header="Spiel loeschen"
+                    severity="alert"
+                    widgetVar="confirmation">
+                <p:commandButton value="Ja"
+                                 oncomplete="confirmation.hide()"
+                                 ajax="false"
+                                 action="#{selectedVideo.doDeleteVideo}" />
+                <p:commandButton value="Nein"
+                                 onclick="confirmation.hide()" />
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</body>
+</html>
